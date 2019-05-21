@@ -55,19 +55,25 @@ public class Restaurants {
 		System.out.println(document.toJson());
 	    }
 	};
-	mongoCollection
-		.aggregate(Arrays.asList(
+//	count of bakeries in each star categories
+	mongoCollection.aggregate(Arrays.asList(
 			Aggregates.match(Filters.eq("categories", "Bakery")),
-			Aggregates.group("$stars",
-				Accumulators.sum("count", 1))))
+			Aggregates.group("$stars", Accumulators.sum("count", 1))))
 		.forEach(printBlock);
-	mongoCollection
-		.aggregate(Arrays.asList(Aggregates.project(Projections.fields(
+	
+//	count of restaurants in different categories
+	mongoCollection.aggregate(
+		Arrays.asList(
+			Aggregates.unwind("$categories"),
+			Aggregates.group("$categories", Accumulators.sum("count", 1))))
+		.forEach(printBlock);
+//	prints first element of the array categories
+	mongoCollection.aggregate(Arrays.asList(Aggregates.project(Projections.fields(
 			Projections.excludeId(), Projections.include("name"),
 			Projections.computed("firstCategory",
-				new Document("$arrayElemAt",
-					Arrays.asList("$categories", 0)))))))
+				new Document("$arrayElemAt", Arrays.asList("$categories", 0)))))))
 		.forEach(printBlock);
+
 	mongoClient.close();
     }
 }
