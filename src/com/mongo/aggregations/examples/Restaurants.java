@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mongo.aggregations.examples;
 
 import java.util.Arrays;
@@ -20,6 +17,30 @@ import com.mongodb.client.model.Projections;
  * @author Abin K. Antony 
  * 21-May-2019
  * @version 1.0
+ * Aggregation pipeline example with restaurant dataset
+ * {
+    "_id":{
+        "$oid":"57506d62f57802807471dd3d"
+    },
+    "name":"Sun Bakery Trattoria",
+    "contact":{
+        "phone":"386-555-0189",
+        "email":"SunBakeryTrattoria@example.org",
+        "location":[
+            -74.0056649,
+            40.7452371
+        ]
+    },
+    "stars":4,
+    "categories":[
+        "Pizza",
+        "Pasta",
+        "Italian",
+        "Coffee",
+        "Sandwiches"
+    ]
+
+}
  */
 public class Restaurants {
     public static void main(String[] args) {

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mongo.aggregations.examples;
 
 import java.util.Arrays;
@@ -20,6 +17,17 @@ import com.mongodb.client.model.Sorts;
  * @author Abin K. Antony
  * 21-May-2019
  * @version 1.0
+ * Aggregation pipeline example with zipcodes data
+ * {
+    "_id":"01001",
+    "city":"AGAWAM",
+    "loc":[
+        -72.622739,
+        42.070206
+    ],
+    "pop":15338,
+    "state":"MA"
+}
  */
 public class ZipCodes {
     public static void main(String[] args) {
