@@ -56,7 +56,8 @@ public class Restaurants {
 	    }
 	};
 //	count of bakeries in each star categories
-	mongoCollection.aggregate(Arrays.asList(
+	mongoCollection.aggregate(
+		Arrays.asList(
 			Aggregates.match(Filters.eq("categories", "Bakery")),
 			Aggregates.group("$stars", Accumulators.sum("count", 1))))
 		.forEach(printBlock);
@@ -68,7 +69,8 @@ public class Restaurants {
 			Aggregates.group("$categories", Accumulators.sum("count", 1))))
 		.forEach(printBlock);
 //	prints first element of the array categories
-	mongoCollection.aggregate(Arrays.asList(Aggregates.project(Projections.fields(
+	mongoCollection.aggregate(
+		Arrays.asList(Aggregates.project(Projections.fields(
 			Projections.excludeId(), Projections.include("name"),
 			Projections.computed("firstCategory",
 				new Document("$arrayElemAt", Arrays.asList("$categories", 0)))))))
